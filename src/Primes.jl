@@ -303,11 +303,11 @@ function pollardfactors!{T<:Integer,K<:Integer}(n::T, h::Associative{K,Int})
             local k::K = 0
             G = 1
             while k < r && G == 1
-                for i in 1:(m>(r-k)?(r-k):m)
+                for i in 1:(m>(r-k) ? (r-k) : m)
                     ys = y
                     y = (y*y)%n
                     y = (y+c)%n
-                    q = (q*(x>y?x-y:y-x))%n
+                    q = (q*(x>y ? x-y : y-x))%n
                 end
                 G = gcd(q,n)
                 k = k + m
@@ -318,7 +318,7 @@ function pollardfactors!{T<:Integer,K<:Integer}(n::T, h::Associative{K,Int})
         while G == 1
             ys = (ys*ys)%n
             ys = (ys+c)%n
-            G = gcd(x>ys?x-ys:ys-x,n)
+            G = gcd(x>ys ? x-ys : ys-x,n)
         end
         if G != n
             isprime(G) ? h[G] = get(h,G,0) + 1 : pollardfactors!(G,h)
